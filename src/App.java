@@ -7,7 +7,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 //JSON simple library imports
 import org.json.simple.JSONArray;
@@ -18,15 +17,9 @@ import org.json.simple.parser.ParseException;
 class App {
     private int _counter=0;
     private StringBuilder _processBar = new StringBuilder("_________________________");
-    private String _token;
-
-    App(String token){
-        this._token=token;
-    }
 
     private HttpURLConnection _getConnection(String url) throws MalformedURLException, IOException{     
-        HttpURLConnection httpClient = (HttpURLConnection) new URL(url).openConnection();        
-        httpClient.setRequestProperty("Authorization", "Bearer "+this._token);
+        HttpURLConnection httpClient = (HttpURLConnection) new URL(url).openConnection();
         httpClient.setRequestMethod("GET");
         return httpClient;
     }
@@ -161,13 +154,10 @@ class App {
     }
 
     public static void main(String[] args) throws Exception {
-        Scanner sc = new Scanner(System.in);
-        String token = "";
-        System.out.print("Please Enter your token : ");
-        token = sc.nextLine();
-        App app = new App(token);
-        sc.close();
+
+        App app = new App();
         app.run();
+
     }
     
 }
